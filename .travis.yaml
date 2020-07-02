@@ -13,10 +13,8 @@ after_success:
  - docker build -t navarro-chamberlain/multi-nginx ./nginx
  - docker build -t navarro-chamberlain/multi-server ./server
  - docker build -t navarro-chamberlain/multi-worker ./worker
- #Login in to Docker CLI
-- echo "$docker_password" | docker login -u "$docker_id" --password-stdin
-#Take those images and push
-- docker push navarro-chamberlain/multi-client
-- docker push navarro-chamberlain/multi-nginx
-- docker push navarro-chamberlain/multi-server
-- docker push navarro-chamberlain/multi-worker
+ - echo "$docker_password" | docker login -u "$docker_id" --password-stdin
+ - docker push navarro-chamberlain/multi-client
+ - docker push navarro-chamberlain/multi-nginx
+ - docker push navarro-chamberlain/multi-server
+ - docker push navarro-chamberlain/multi-worker
