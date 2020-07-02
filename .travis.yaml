@@ -1,0 +1,22 @@
+sudo: required
+services: 
+    -docker
+
+before-install:
+    -docker build -t navarro-chamberlain/react-test -f ./client/dockerfile.dev ./client
+  
+script:
+ - docker run navarro-chamberlain/react-test npm test -- --coverage
+
+after_success:
+ - docker build -t navarro-chamberlain/multi-client ./client
+ - docker build -t navarro-chamberlain/multi-nginx ./nginx
+ - docker build -t navarro-chamberlain/multi-server ./server
+ - docker build -t navarro-chamberlain/multi-worker ./worker
+ #Login in to Docker CLI
+- echo "$docker_password" | docker login -u "$docker_id" --password-stdin
+#Take those images and push
+- docker push navarro-chamberlain/multi-client
+- docker push navarro-chamberlain/multi-nginx
+- docker push navarro-chamberlain/multi-server
+- docker push navarro-chamberlain/multi-worker
