@@ -1,3 +1,4 @@
+language: generic 
 sudo: required
 services: 
     -docker
@@ -6,7 +7,7 @@ before-install:
     -docker build -t navarro-chamberlain/react-test -f ./client/dockerfile.dev ./client
   
 script:
- - docker run navarro-chamberlain/react-test npm test -- --coverage
+ - docker run -e CI=TRUE navarro-chamberlain/react-test npm test
 
 after_success:
  - docker build -t navarro-chamberlain/multi-client ./client
