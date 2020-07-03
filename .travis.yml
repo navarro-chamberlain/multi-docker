@@ -4,20 +4,20 @@ services:
     - docker
 
 before-install:
-    - docker build -t navarro-chamberlain/react-test -f ./client/dockerfile.dev ./client
+    - docker build -t nchamberlain05/react-test -f ./client/dockerfile.dev ./client
   
 script:
- - docker run -e CI=TRUE navarro-chamberlain/react-test npm test
+ - docker run -e CI=TRUE nchamberlain05/react-test npm test
 
 after_success:
- - docker build -t navarro-chamberlain/multi-client ./client
- - docker build -t navarro-chamberlain/multi-nginx ./nginx
- - docker build -t navarro-chamberlain/multi-server ./server
- - docker build -t navarro-chamberlain/multi-worker ./worker
+ - docker build -t nchamberlain05/multi-client ./client
+ - docker build -t nchamberlain05/multi-nginx ./nginx
+ - docker build -t nchamberlain05/multi-server ./server
+ - docker build -t nchamberlain05/multi-worker ./worker
  #Login To Docker
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
  #Build to Prod
- - docker push navarro-chamberlain/multi-client
- - docker push navarro-chamberlain/multi-nginx
- - docker push navarro-chamberlain/multi-server
- - docker push navarro-chamberlain/multi-worker
+ - docker push nchamberlain05/multi-client
+ - docker push nchamberlain05/multi-nginx
+ - docker push nchamberlain05/multi-server
+ - docker push nchamberlain05/multi-worker
