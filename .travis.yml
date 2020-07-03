@@ -15,7 +15,7 @@ after_success:
  - docker build -t navarro-chamberlain/multi-server ./server
  - docker build -t navarro-chamberlain/multi-worker ./worker
  #Login To Docker
- - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
  #Build to Prod
  - docker push navarro-chamberlain/multi-client
  - docker push navarro-chamberlain/multi-nginx
